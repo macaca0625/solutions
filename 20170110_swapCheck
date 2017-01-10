@@ -1,3 +1,4 @@
+<?php
 /*
 date: 2017-01-10
 author: eason Tsai
@@ -64,3 +65,5 @@ function solution($A) {
 echo '<pre>'.print_r(solution($A), true).'</pre>';
 echo '<pre>'.print_r(solution($A2), true).'</pre>';
 echo '<pre>'.print_r(solution($A3), true).'</pre>';
+
+?>
