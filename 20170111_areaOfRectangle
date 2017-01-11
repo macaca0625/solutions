@@ -1,0 +1,38 @@
+<?php
+ini_set('error_reporting', E_ALL/* &~ E_NOTICE*/);
+ini_set('display_errors', 'On');
+ini_set('display_startup_errors', 'On');
+
+/*
+四個座標 ($K,$L) ($M,$N) ($P,$Q) ($R,$S),
+其中($K,$L) ($M,$N)拉成一個矩形
+其中($P,$Q) ($R,$S)拉成一個矩形
+$K<$M    $L<$N    $P<$R    $Q<$S
+計算兩個矩形的聯集之面積
+ */
+function solution($K, $L, $M, $N, $P, $Q, $R, $S) {
+
+    $area = -1;
+
+    // R1在R2上方 OR R1在R2下方 OR R1在R2左方 OR R1在R2右方
+    if($L > $S || $N < $Q || $M < $P || $K > $R){
+        $area = ($M - $K)*($N - $L) + ($R - $P)*($S - $Q);
+    } else if($K > $P && $M < $R && $M > $Q && $N < $S) {
+        // R2包R1
+        $area = ($R - $P)*($S - $Q);
+    } else if($P > $K && $R < $M && $Q > $L && $S < $N) {
+        // R1包R2
+        $area = ($M - $K)*($N - $L);
+    } else {
+        // 圖型相交
+        // 聯集面積 = R1面積 + R2面積 - (相交部分面積)
+        // 聯集面積的寬
+        $intersectionX = max([($R-$K),($M-$P)]) - ($M-$K) - ($R-$P);
+        // 聯集面積的高
+        $intersectionY = max([($N-$Q),($S-$L)]) - ($N-$L) - ($S-$Q);
+
+        $intersection = $intersectionX * $intersectionY;
+        $area = ($M - $K)*($N - $L) + ($R - $P)*($S - $Q) - $intersection;
+    }
+    return $area;
+}
