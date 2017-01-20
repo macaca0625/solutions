@@ -1,0 +1,19 @@
+<?php
+/*
+date: 2017-01-21
+author: eason Tsai
+
+$A陣列裡面會有一堆整數，
+寫一個FUNCTION來計算其中所有[二位數]之總和 
+例如[1,1000,80,-91] RETURN = -11，來自[80+(-91)]
+*/
+function solution($A) {
+    $sum = 0;
+    foreach ($A as $value) {
+        $absolute = ($value  >= 0)? $value : ($value*-1);
+        if($absolute > 9 && $absolute < 100) {
+            $sum = $sum + $value;
+        }
+    }
+    return $sum;
+}
