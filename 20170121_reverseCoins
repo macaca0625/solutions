@@ -1,0 +1,28 @@
+<?php
+/*
+date: 2017-01-21
+author: eason Tsai
+
+$A 是丟硬幣結果的陣列，1＝反面 0＝正面，
+例如[0,1,0,1,0,0,0,0]，寫一個function來算出
+「把這些硬幣全部翻成同一面 最少需要翻面幾次？」
+全翻正面或是全翻反面皆可
+*/
+
+function solution($A) {
+    if(count($A) == 1) {
+        return 0;
+    }
+    $count['head'] = 0;
+    $count['tail'] = 0;
+    foreach ($A as $value) {
+        if($value == 1) {
+            $count['tail'] ++;
+        } else {
+            $count['head'] ++;
+        }
+    }
+    $reverseTimes = min($count);
+    return $reverseTimes;
+}
+?>
