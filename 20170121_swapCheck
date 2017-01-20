@@ -1,0 +1,40 @@
+<?php
+/*
+date: 2017-01-21
+author: eason Tsai
+
+判斷一個array裡面的元素可不可以透過最多一次swap就達成「升冪排序」。
+例如 $A = [1,5,3,3,7] 只需要換一次, 把第二項的5跟倒數第二的3對調，變成 [1,3,3,5,7]
+這樣就return true否則回 false
+*/
+
+function solution($A) {
+    $len = count($A);
+    $swap = false;
+    for ($i=0;$i<$len-1;$i++) {
+        if(($A[$i] > $A[$i+1])) {
+            if(!$swap) {
+                // 從$i的右邊項目裡面找最小的換過來
+                $temp_max = 1000000000;
+                for($j = $i+1; $j<$len;$j++){
+                    if($A[$j] <= $temp_max){
+                        $temp_max = $A[$j];
+                        $toSwap['right'] = $j;
+                    }
+                }
+
+
+                $temp = $A[$toSwap['right']];
+                $A[$toSwap['right']] = $A[$i];
+                $A[$i] = $temp;
+                //var_dump("swap #".$i.' AND #'.($i+1));
+                $swap = true;
+            } else {
+                return false;
+            }
+        }
+    }
+    return true;
+}
+
+?>
